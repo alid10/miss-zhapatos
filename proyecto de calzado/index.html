@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MISS ZHAPATOS</title>
+  
+  <link rel="stylesheet" href="style.css" />
+ 
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <header class="top-bar">
+    <div class="brands"><span>AQUI ES DONDE ENCONTRARAS TODO TIPO DE CALZADO</span></div>
+    <p class="top-msg"><strong>ENVÍOS Y CAMBIOS FÁCILES A NIVEL NACIONAL</strong></p>
+  </header>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="logo">MISS ZHAPATOS</div>
+    <ul class="nav-links">
+      <li><a href="#" class="nav-btn active" data-cat="inicio">🏠 Inicio</a></li>
+      <li><a href="#" class="nav-btn" data-cat="mujer">👠 Mujer</a></li>
+      <li><a href="#" class="nav-btn" data-cat="hombre">👞 Hombre</a></li>
+      <li><a href="#" class="nav-btn" data-cat="ninos">👟 Niños</a></li>
+    </ul>
+
+    <div class="icons">
+      <input id="search" placeholder="Buscar producto (filtra en la sección activa)..." />
+      <div id="cart-toggle" class="cart-icon" title="Ver carrito">🛒<span id="cart-count">0</span></div>
+    </div>
+  </nav>
+
+  <!-- BACKGROUND & HERO (visible only on inicio) -->
+  <div class="background" id="background">
+    <img src="img/imagen 1.webp" class="zapato-fondo" alt="zapato">
+    <div class="logos-fondo" id="logos-fondo">
+      <div class="floating brand b1">NIKE</div>
+      <div class="floating brand b2">PUMA</div>
+      <div class="floating brand b3">JORDAN</div>
+      <div class="floating brand b4">ADIDAS</div>
+    </div>
+  </div>
+
+  <section class="hero" id="inicio">
+    <div class="overlay">
+      <p class="promo">Colección Exclusiva</p>
+      <h1 id="brand-title">MISS ZHAPATOS</h1>
+      <p class="lead">Innovación y estilo que te acompañan en cada paso.</p>
+      <p class="explore-text">Explora nuestras colecciones: Mujer · Hombre · Niños</p>
+    </div>
+  </section>
+
+  <!-- MAIN CATALOG AREA (sections hidden by default except inicio) -->
+  <main class="main">
+    <section id="mujer" class="catalog-section hidden" aria-hidden="true">
+      <h2 class="section-title">Colección Mujer</h2>
+      <div class="catalogo" id="cat-mujer"></div>
+    </section>
+
+    <section id="hombre" class="catalog-section hidden" aria-hidden="true">
+      <h2 class="section-title">Colección Hombre</h2>
+      <div class="catalogo" id="cat-hombre"></div>
+    </section>
+
+    <section id="ninos" class="catalog-section hidden" aria-hidden="true">
+      <h2 class="section-title">Colección Niños</h2>
+      <div class="catalogo" id="cat-ninos"></div>
+    </section>
+  </main>
+
+  <!-- CART ASIDE -->
+  <aside id="cart-aside" class="cart-aside" aria-hidden="true">
+    <div class="cart-head">
+      <h3>Tu carrito</h3>
+      <button id="cart-close" class="small-close">&times;</button>
+    </div>
+
+    <div id="cart-items" class="cart-items"></div>
+
+    <div class="cart-summary">
+      <div style="display:flex;justify-content:space-between"><span>Subtotal</span><strong id="cart-subtotal">$0</strong></div>
+      <div style="display:flex;justify-content:space-between"><span>Envío fijo</span><strong id="cart-shipping">$25,000</strong></div>
+      <div style="display:flex;justify-content:space-between;font-size:18px;color:#00B140;font-weight:900"><span>Total</span><strong id="cart-total">$0</strong></div>
+
+      <div style="margin-top:8px">
+        <button id="btn-checkout" class="btn btn-primary" disabled>Finalizar compra</button>
+        <button id="btn-clear" class="btn btn-ghost">Vaciar carrito</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- DETAIL MODAL (reuse for view/add) -->
+  <div id="detail-modal" class="modal hidden" aria-hidden="true">
+    <div class="modal-panel">
+      <button class="modal-close" id="detail-close">&times;</button>
+      <div class="detail-grid">
+        <img id="detail-img" src="IMG/default.jpg" alt="producto" />
+        <div class="detail-info">
+          <h2 id="detail-name"></h2>
+          <p id="detail-desc"></p>
+          <p class="detail-price" id="detail-price"></p>
+          <p id="detail-stock" class="detail-stock"></p>
+          <p id="detail-kind" style="font-weight:700"></p>
+
+          <div style="display:flex;gap:8px;align-items:center;margin-top:10px">
+            <label>Talla:</label>
+            <div id="detail-sizes" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+          </div>
+
+          <div style="display:flex;gap:8px;align-items:center;margin-top:10px">
+            <label>Cantidad:</label>
+            <div style="display:flex;align-items:center;gap:6px">
+              <button id="det-minus" class="qty-btn">−</button>
+              <input id="det-qty" type="number" value="1" min="1" style="width:56px;text-align:center" />
+              <button id="det-plus" class="qty-btn">+</button>
+            </div>
+          </div>
+
+          <div class="detail-actions" style="margin-top:12px">
+            <button id="det-add" class="btn btn-primary">Añadir al carrito</button>
+            <button id="det-close-2" class="btn btn-ghost">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKOUT FORM MODAL -->
+  <div id="checkout-modal" class="modal hidden" aria-hidden="true">
+    <div class="modal-panel small checkout-white" id="checkout-panel">
+      <button class="modal-close" id="checkout-close">&times;</button>
+      <h3 style="color:#00B140">Finalizar compra</h3>
+
+      <form id="checkout-form" class="checkout-form">
+        <input id="c-name" type="text" placeholder="Nombre completo" required />
+        <input id="c-address" type="text" placeholder="Dirección" required />
+        <div style="display:flex;gap:8px">
+          <select id="c-dept" required style="flex:1"></select>
+          <select id="c-city" required style="flex:1"></select>
+        </div>
+        <input id="c-phone" type="tel" placeholder="Teléfono" required />
+        <input id="c-email" type="email" placeholder="Correo (registro visual)" required />
+
+        <div style="margin-top:8px;padding:8px;border:1px solid #eee;border-radius:8px;background:#f7fff9">
+          <div style="font-weight:800;color:#00B140">Método de pago: transferencia</div>
+          <label style="display:block;margin-top:8px;font-size:13px;color:#333">Selecciona el banco para la transferencia</label>
+          <select id="c-bank" required>
+            <option value="Bancolombia">Bancolombia</option>
+            <option value="Davivienda">Davivienda</option>
+            <option value="BBVA">BBVA</option>
+            <option value="Daviplata">Daviplata</option>
+            <option value="Nequi">Nequi</option>
+            <option value="Banco de Bogotá">Banco de Bogotá</option>
+            <option value="Banco Popular">Banco Popular</option>
+            <option value="Movii">Movii</option>
+            <option value="Lulo Bank">Lulo Bank</option>
+            <option value="Banco Agrario">Banco Agrario</option>
+          </select>
+        </div>
+
+        <div class="checkout-summary" style="margin-top:8px">
+          <div style="display:flex;justify-content:space-between"><small style="color:#00B140">Subtotal</small><div id="checkout-sub">$0</div></div>
+          <div style="display:flex;justify-content:space-between"><small style="color:#00B140">Envío</small><div id="checkout-ship">$25,000</div></div>
+          <div class="checkout-total" style="display:flex;justify-content:space-between;margin-top:8px"><strong style="color:#00B140">Total</strong><div id="checkout-total">$0</div></div>
+        </div>
+
+        <div class="checkout-actions" style="margin-top:12px">
+          <button type="submit" class="btn btn-primary">Confirmar y generar factura (PDF)</button>
+          <button type="button" class="btn btn-ghost" id="checkout-cancel">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- INVOICE PREVIEW modal -->
+  <div id="invoice-modal" class="modal hidden" aria-hidden="true">
+    <div class="modal-panel small">
+      <button class="modal-close" id="invoice-close">&times;</button>
+      <div id="invoice-preview" style="background:#fff;color:#000;padding:16px;border-radius:8px;max-height:60vh;overflow:auto"></div>
+
+      <div style="display:flex;gap:8px;margin-top:12px;justify-content:flex-end;">
+        <button id="download-invoice" class="btn btn-primary">Descargar factura (PDF)</button>
+        <button id="close-invoice" class="btn btn-ghost">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- jsPDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <script src="java.js"></script>
+  <a href="https://www.misszhapatos.com" target="_blank" style="font-size:18px; color:#00B140;">Ir a la página</a>
+</body>
+</html>
+
